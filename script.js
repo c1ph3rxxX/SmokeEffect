@@ -355,6 +355,53 @@ canvas.addEventListener('mousemove', e => {
     pointers[0].color = color;
 });
 
+// --- NEW: Add Touch Event Listeners for Mobile ---
+
+// This function runs when a finger first touches the screen.
+// It captures the initial position.
+canvas.addEventListener('touchstart', e => {
+    // Prevent the browser from trying to scroll the page
+    e.preventDefault(); [1]
+
+    const touch = e.touches;
+    const rect = canvas.getBoundingClientRect();
+    const posX = touch.clientX - rect.left;
+    const posY = touch.clientY - rect.top;
+
+    // Update the pointer's initial position to prevent a jump
+    pointers.x = posX;
+    pointers.y = posY;
+}, { passive: false }); // This option is necessary to allow preventDefault() [1]
+
+// This function runs when a finger is dragged across the screen.
+// It creates the smoke effect.
+canvas.addEventListener('touchmove', e => {
+    // Prevent the browser from scrolling the page while drawing
+    e.preventDefault(); [2]
+
+    // Use the first touch point for the effect
+    const touch = e.touches; [3]
+
+    // Smoothly cycle hue based on finger movement
+    hue += 0.01;
+    if(hue > 1) hue = 0;
+    const color = hslToRgb(hue, 1.0, 0.5);
+
+    // This tells the animation to draw a splat on every move
+    pointers.moved = true; 
+    
+    // Get coordinates relative to the canvas element
+    const rect = canvas.getBoundingClientRect();
+    const posX = touch.clientX - rect.left; [4]
+    const posY = touch.clientY - rect.top; [4]
+
+    pointers.dx = (posX - pointers.x) * 5.0;
+    pointers.dy = (posY - pointers.y) * 5.0;
+    pointers.x = posX;
+    pointers.y = posY;
+    pointers.color = color;
+}, { passive: false }); // This option is necessary to allow preventDefault() [1]
+
 
 // --- Text animation and Audio control ---
 const title = document.getElementById("main-title");
