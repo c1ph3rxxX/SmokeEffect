@@ -2,7 +2,7 @@
 
 A stunning web animation that creates colorful smoke trails following your mouse cursor, built with **HTML**, **CSS**, and **JavaScript**. Perfect for learning web development and canvas animations!
 
-[**Live Demo**](#)
+[**Live Demo**](https://c1ph3rxxx.github.io/SmokeEffect/)
 
 ## Features
 - Interactive smoke effect triggered by mouse movement.
