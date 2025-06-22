@@ -9,7 +9,7 @@ A stunning web animation that creates colorful smoke trails following your mouse
 - Randomly colored particles using **HSL** for vibrant visuals.
 - Lightweight and runs smoothly in modern browsers.
 
-[**Watch the Tutorial**](#): Learn how to set up and run this project in my YouTube video!
+[**Watch the Tutorial**](https://youtu.be/CO9oC6oarQc): Learn how to set up and run this project in my YouTube video!
 
 ## Files
 - `index.html`: Sets up the canvas element.
