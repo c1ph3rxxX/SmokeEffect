@@ -339,88 +339,21 @@ function resizeCanvas() {
 
 
 // --- UPDATED: Mouse and Touch Listeners ---
-// canvas.addEventListener('mousemove', e => {
-//     // Smoothly cycle hue based on mouse movement
-//     hue += 0.01;
-//     if(hue > 1) hue = 0;
-//     const color = hslToRgb(hue, 1.0, 0.5);
-
-//     // This now tells the animation to draw a splat on every mouse move
-//     pointers[0].moved = true; 
-    
-//     pointers[0].dx = (e.offsetX - pointers[0].x) * 5.0;
-//     pointers[0].dy = (e.offsetY - pointers[0].y) * 5.0;
-//     pointers[0].x = e.offsetX;
-//     pointers[0].y = e.offsetY;
-//     pointers[0].color = color;
-// });
-
-// // --- NEW: Add Touch Event Listeners for Mobile ---
-
-// // This function runs when a finger first touches the screen.
-// // It captures the initial position.
-// canvas.addEventListener('touchstart', e => {
-//     // Prevent the browser from trying to scroll the page
-//     e.preventDefault(); [1]
-
-//     const touch = e.touches;
-//     const rect = canvas.getBoundingClientRect();
-//     const posX = touch.clientX - rect.left;
-//     const posY = touch.clientY - rect.top;
-
-//     // Update the pointer's initial position to prevent a jump
-//     pointers.x = posX;
-//     pointers.y = posY;
-// }, { passive: false }); // This option is necessary to allow preventDefault() [1]
-
-// --- UNIFIED: Pointer Event Listener for All Devices ---
-// This single listener handles mouse, touch, and pen input.
-canvas.addEventListener('pointermove', e => {
-    // Smoothly cycle hue based on pointer movement
+canvas.addEventListener('mousemove', e => {
+    // Smoothly cycle hue based on mouse movement
     hue += 0.01;
     if(hue > 1) hue = 0;
     const color = hslToRgb(hue, 1.0, 0.5);
 
-    // This tells the animation to draw a splat on every move
-    pointers.moved = true; 
+    // This now tells the animation to draw a splat on every mouse move
+    pointers[0].moved = true; 
     
-    // Use offsetX/Y for coordinates relative to the canvas, which works for all pointer types
-    pointers.dx = (e.offsetX - pointers.x) * 5.0;
-    pointers.dy = (e.offsetY - pointers.y) * 5.0;
-    pointers.x = e.offsetX;
-    pointers.y = e.offsetY;
-    pointers.color = color;
+    pointers[0].dx = (e.offsetX - pointers[0].x) * 5.0;
+    pointers[0].dy = (e.offsetY - pointers[0].y) * 5.0;
+    pointers[0].x = e.offsetX;
+    pointers[0].y = e.offsetY;
+    pointers[0].color = color;
 });
-
-
-// This function runs when a finger is dragged across the screen.
-// It creates the smoke effect.
-canvas.addEventListener('touchmove', e => {
-    // Prevent the browser from scrolling the page while drawing
-    e.preventDefault(); [2]
-
-    // Use the first touch point for the effect
-    const touch = e.touches; [3]
-
-    // Smoothly cycle hue based on finger movement
-    hue += 0.01;
-    if(hue > 1) hue = 0;
-    const color = hslToRgb(hue, 1.0, 0.5);
-
-    // This tells the animation to draw a splat on every move
-    pointers.moved = true; 
-    
-    // Get coordinates relative to the canvas element
-    const rect = canvas.getBoundingClientRect();
-    const posX = touch.clientX - rect.left; [4]
-    const posY = touch.clientY - rect.top; [4]
-
-    pointers.dx = (posX - pointers.x) * 5.0;
-    pointers.dy = (posY - pointers.y) * 5.0;
-    pointers.x = posX;
-    pointers.y = posY;
-    pointers.color = color;
-}, { passive: false }); // This option is necessary to allow preventDefault() [1]
 
 
 // --- Text animation and Audio control ---
